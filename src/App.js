@@ -6,46 +6,26 @@ import CartContainer from "./components/CartContainer";
 import cartItems from "./cart-items";
 // redux stuff
 import { createStore } from "redux";
-
+//ACTIONS
+import { DECREASE, INCREASE } from "./actions";
 //-- the reducer
-
+import { reducer } from "./reducers/reducer";
 const initialStore = {
   count: 0,
+  name: "stephen",
+  age: 26,
 };
 
-const reducer = (state, action) => {
-  console.log({ state, action });
-  switch (action.type) {
-    case "INCREASE":
-      console.log("Increasing count");
-      return { count: state.count + 1 };
-    case "DECREASE":
-      console.log("Decreasing count");
-      return {
-        count: state.count - 1,
-      };
-
-    case "RESET":
-      return {
-        count: 0,
-      };
-
-    default:
-      return state;
-  }
-};
 const store = createStore(
   reducer,
   initialStore
   // +window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-store.dispatch({ type: "INCREASE" });
-store.dispatch({ type: "INCREASE" });
-store.dispatch({ type: "INCREASE" });
-store.dispatch({ type: "INCREASE" });
-store.dispatch({ type: "DECREASE" });
-store.dispatch({ type: "RESET" });
+store.dispatch({ type: INCREASE });
+
+store.dispatch({ type: DECREASE });
+
 console.log(store.getState());
 
 function App() {
