@@ -17,13 +17,13 @@ import { Provider } from "react-redux";
 const initialStore = {
   cart: cartItems,
   total: 500,
-  amount: 5,
+  amount: 8,
 };
 
 const store = createStore(
   reducer,
-  initialStore
-  // +window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  initialStore,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 function App() {
