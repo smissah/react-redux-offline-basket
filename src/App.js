@@ -23,13 +23,12 @@ const store = createStore(
 );
 
 store.dispatch({ type: INCREASE });
-
 store.dispatch({ type: DECREASE });
 
 console.log(store.getState());
 
 function App() {
-  // cart setup
+  // cart setupgoes here
 
   return (
     <main>
