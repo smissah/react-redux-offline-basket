@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import CartItem from "./CartItem";
-const CartContainer = ({ cart = [] }) => {
+
+const CartContainer = ({ cart = [], total = 0 }) => {
   if (cart.length === 0) {
     return (
       <section className="cart">
@@ -29,7 +31,7 @@ const CartContainer = ({ cart = [] }) => {
         <hr />
         <div className="cart-total">
           <h4>
-            total <span>$0.00</span>
+            total <span>£{total}</span>
           </h4>
         </div>
         <button className="btn clear-btn">clear cart</button>
@@ -38,4 +40,13 @@ const CartContainer = ({ cart = [] }) => {
   );
 };
 
-export default CartContainer;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+    cart: state.cart,
+    total: state.total,
+
+    //ive assinement state.cart from original store to cart which can be used in CartContainer component as a prop!!
+  };
+};
+export default connect(mapStateToProps)(CartContainer);
