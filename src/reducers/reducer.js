@@ -7,11 +7,22 @@ export const reducer = (state, action) => {
       return { ...state, cart: [] };
 
     case INCREASE:
-      console.log("increasing items");
+      let tempCart = state.cart.map((singleCartItem, index) => {
+        console.log(singleCartItem);
+        if (singleCartItem.id === action.payload.itemID) {
+          singleCartItem = {
+            ...singleCartItem,
+            amount: singleCartItem.amount + 1,
+          };
+        }
+        return singleCartItem;
+      });
+      return { ...state, cart: tempCart };
+
       return state;
 
     case DECREASE:
-      console.log("decreasomg items");
+      console.log("decreasing items");
       return state;
 
     case REMOVE_ITEM: {
