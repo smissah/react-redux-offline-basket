@@ -37,12 +37,13 @@ export const reducer = (state, action) => {
       tempCart = state.cart.map((cartItem) => {
         if (cartItem.id === action.payload.id) {
           cartItem = {
-            ...state,
+            ...cartItem,
             amount: cartItem.amount - 1,
           };
         }
         return cartItem;
       });
+      console.log(`new temp cart is ${tempCart}`);
     }
 
     return {

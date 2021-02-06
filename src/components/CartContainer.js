@@ -23,7 +23,8 @@ const CartContainer = ({ cart = [], total = 0, dispatch }) => {
       </header>
       {/* cart items */}
       <article>
-        {cart.map((item) => {
+        {cart.map((item, index) => {
+          console.log(item);
           return <CartItem key={item.id} {...item} />;
         })}
       </article>
