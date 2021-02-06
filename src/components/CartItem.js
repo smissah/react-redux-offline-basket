@@ -49,10 +49,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   //destructre the props
   const { id, amount } = ownProps;
   return {
-    remove: () => dispatch({ type: REMOVE_ITEM, payload: { itemID: id } }),
-    increase: () => dispatch({ type: INCREASE, payload: { itemID: id } }),
-    decrease: () =>
-      dispatch({ type: DECREASE, payload: { itemID: id, itemAmount: amount } }),
+    remove: () => dispatch({ type: REMOVE_ITEM, payload: { id } }),
+    increase: () => dispatch({ type: INCREASE, payload: { id } }),
+    decrease: () => dispatch({ type: DECREASE, payload: { id, amount } }),
     // dispatch({ type: DECREASE, payload: { id, amount } }), //!this works too
   };
 };
