@@ -1,4 +1,10 @@
-import { DECREASE, INCREASE, CLEAR_CART, REMOVE_ITEM } from "../actions";
+import {
+  DECREASE,
+  INCREASE,
+  CLEAR_CART,
+  REMOVE_ITEM,
+  GET_TOTAL,
+} from "../actions";
 
 export const reducer = (state, action) => {
   if (action.type === CLEAR_CART) {
@@ -25,11 +31,8 @@ export const reducer = (state, action) => {
   }
 
   if (action.type === DECREASE) {
-    // console.log(action);
-
     let tempCart = [];
     if (action.payload.amount === 1) {
-      console.log(`You've only got one item, bro`);
       tempCart = state.cart.filter((cartItem) => {
         return cartItem.id !== action.payload.id;
       });
@@ -58,6 +61,27 @@ export const reducer = (state, action) => {
       ...state,
       cart: state.cart.filter((cartItem) => cartItem.id !== itemId),
     };
+  }
+
+  if (action.type === GET_TOTAL) {
+    console.log("getting total");
+    //below: destructure the objects that will be returned
+    let { total, amount } = state.cart.reduce(
+      (cartTotal, currentCart) => {
+        // console.log(currentCart);
+        const { price, amount } = currentCart;
+        cartTotal.amount += amount;
+        cartTotal.total += price * amount;
+        //! Total/Accumulator  must always be returned!!!
+        return cartTotal; //!< this cart total represents the below online
+      },
+      {
+        total: 0,
+        amount: 0,
+      }
+    );
+    total = parseFloat(total.toFixed(2));
+    return { ...state, total, amount };
   }
   return state;
 };
