@@ -4,6 +4,7 @@ import {
   CLEAR_CART,
   REMOVE_ITEM,
   GET_TOTAL,
+  TOGGLE_AMOUNT,
 } from "../actions";
 
 export const reducer = (state, action) => {
@@ -75,6 +76,23 @@ export const reducer = (state, action) => {
     );
     total = parseFloat(total.toFixed(2));
     return { ...state, total, amount };
+  }
+
+  if (action.type === TOGGLE_AMOUNT) {
+    return {
+      ...state,
+      cart: state.cart.map((cartItem) => {
+        if (cartItem.id === action.payload.id) {
+          if (action.payload.toggle === "inc") {
+            return (cartItem = { ...cartItem, amount: cartItem.amount + 1 });
+          }
+          if (action.payload.toggle === "dec") {
+            return (cartItem = { ...cartItem, amount: cartItem.amount - 1 });
+          }
+        }
+        return cartItem;
+      }),
+    };
   }
   return state;
 };
